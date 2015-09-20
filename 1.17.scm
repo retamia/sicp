@@ -1,5 +1,5 @@
 (define (double n)
-  (* 2 n))
+  (+ n n))
 
 (define (halve n)
   (/ n 2))
