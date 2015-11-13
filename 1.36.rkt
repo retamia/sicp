@@ -7,7 +7,6 @@
 
 (define tolerance 0.00001)
 
-
 (define (fixed-point f first-guess)
   (define (display-info guess step)
     (display "Step: ")
