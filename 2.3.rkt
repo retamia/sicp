@@ -53,15 +53,22 @@
                            (y-point (end-segment segment))))))))
 
 ;;第一种表现方式 根据长和宽 还有种根据4个线段，具体不展示了
+;;
+;;构造函数
 (define (make-rectanger length width)
   (cons length width))
 
+;;选择函数
 (define (length-of-rectanger rectanger)
   (segment-length (car rectanger)))
-
+;;选择函数
 (define (width-of-rectanger rectanger)
   (segment-length (cdr rectanger)))
 
+
+
+
+;;
 (define (perimeter-rectanger rectanger)
   (let ((length (length-of-rectanger rectanger))
         (width (width-of-rectanger rectanger)))
