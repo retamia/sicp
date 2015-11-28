@@ -27,8 +27,12 @@
               0
               sequence))
 
-(map (lambda (x)(* x x)) (list 1 2 3))
-(append (list 1 2 3) (list 4 5 6))
-(length (list 1 2 3))
+(define (horner-eval x coefficient-sequence)
+  (accumulate (lambda (this-coeff higher-terms)
+                (+ this-coeff (* x higher-terms)))
+              0
+              coefficient-sequence))
+
+(horner-eval 2 (list 1 3 0 5 0 1))
 
 
