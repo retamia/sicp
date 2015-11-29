@@ -18,13 +18,16 @@
               nil
               sequence))
 
-(define (append seq1 seq2)
-  (accumulate cons seq1 seq2))
 
-(define (length sequence)
-  (accumulate (lambda (x y)
-                (+ 1 y))
+(define (count-leaves tree)
+  (accumulate +
               0
-              sequence))
+              (map (lambda (sub-tree)
+                     (if (not (pair? sub-tree))
+                         1
+                         (count-leaves sub-tree)))
+                   tree)))
+
+(count-leaves (list (list 1 2) (list 5 6) (list 3 4)))
 
 
