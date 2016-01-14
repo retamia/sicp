@@ -41,10 +41,10 @@
   (caddr s))
 
 (define (exponentiation? e)
-  (and (pair? e) (eq? (car e) `**)))
+  (and (pair? e) (eq? (cadr e) `**)))
 
 (define (base e)
-  (cadr e))
+  (car e))
 
 (define (exponent e)
   (caddr e))
@@ -52,7 +52,7 @@
 (define (make-exponentiation base exponent)
   (cond ((= exponent 0) 1)
         ((= exponent 1) base)
-        (else (list `** base exponent))))
+        (else (list base `**  exponent))))
 
 (define (deriv exp var)
   (cond ((number? exp) 0)
@@ -74,6 +74,6 @@
         (else
          (error "unknown expression type -- DERIV" exp))))
 
-(deriv `((x * y) * (x + 3)) `x)
+(deriv `((x ** 2) + (x * y) * (x + 3)) `x)
 
 
