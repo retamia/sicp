@@ -1,0 +1,30 @@
+#lang racket
+
+(require "binary-tree.rkt")
+
+(define (union-set tree1 tree2)
+  (define (union-set-helper set1 set2)
+  (cond ((null? set1) set2)
+        ((null? set2) set1)
+        (else
+         (let ((x1 (car set1)) (x2 (car set2)))
+           (cond ((= x1 x2)
+                  (cons x1 (union-set-helper (cdr set1) (cdr set2))))
+                 ((< x1 x2)
+                  (cons x1 (union-set-helper (cdr set1) set2)))
+                 ((< x2 x1)
+                  (cons x2 (union-set-helper set1 (cdr set2)))))))))
+  (list->tree (union-set-helper (tree->list tree1) (tree->list tree2))))
+
+(define (intersection-set tree1 tree2)
+  (define (intersection-set-helper set1 set2)
+  (if (or (null? set1) (null? set2))
+      `()
+      (let ((x1 (car set1)) (x2 (car set2)))
+        (cond ((= x1 x2)
+               (cons x1 (intersection-set-helper (cdr set1) (cdr set2))))
+              ((< x1 x2)
+               (intersection-set-helper (cdr set1) set2))
+              ((< x2 x1)
+               (intersection-set-helper set1 (cdr set2)))))))
+  (list->tree (intersection-set-helper (tree->list tree1) (tree->list tree2))))
